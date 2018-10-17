@@ -38,7 +38,7 @@ void print_static_text(yajl_gen json_gen, char *buffer, const char *title, const
 
     INSTANCE(pidfile);
 
-    START_COLOR((*contents ? "color_good" : "color_bad"));
+    START_COLOR((contents && *contents ? "color_good" : "color_bad"));
 
     for (; *walk != '\0'; walk++) {
         if (*walk != '%') {
