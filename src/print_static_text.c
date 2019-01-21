@@ -12,7 +12,7 @@
 
 void print_static_text(yajl_gen json_gen, char *buffer, const char *title, const char *pidfile, const char *format, const char *format_down) {
     static long long last_mtime;
-    static char *contents;
+    static char *contents = NULL;
     const char *walk;
     char *outwalk = buffer;
     struct stat sb;
@@ -53,7 +53,7 @@ void print_static_text(yajl_gen json_gen, char *buffer, const char *title, const
             walk += strlen("status");
 
         } else if (BEGINS_WITH(walk + 1, "contents")) {
-            outwalk += sprintf(outwalk, "%s", *contents ? contents : "*");
+            outwalk += sprintf(outwalk, "%s", contents ? contents : "*");
             walk += strlen("contents");
 
         } else {
